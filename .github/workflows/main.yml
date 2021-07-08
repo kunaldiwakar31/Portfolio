@@ -7,7 +7,7 @@ jobs:
     steps:
       # Checkout Repository
       - uses: actions/checkout@v1
-
+  git init
       # Install Flutter command
       - uses: subosito/flutter-action@v1
         with:
