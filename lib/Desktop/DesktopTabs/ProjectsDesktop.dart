@@ -1,10 +1,15 @@
+import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/CommonFunctions/Loader.dart';
 import 'package:portfolio/TextsConstants.dart';
+import 'dart:ui' as ui;
 
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:url_launcher/url_launcher.dart';
+
+final imageAssets = ImageAssetCache(basePath: 'images/');
 
 class ProjectsDesktop extends StatelessWidget {
   @override
@@ -27,16 +32,27 @@ class ProjectsDesktop extends StatelessWidget {
               ),
               Expanded(
                 flex: 4,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: Image.asset(
-                      'images/chatting_app.jpg',
-                    ),
-                  ),
+                child: FutureBuilder<ui.Image>(
+                  future: imageAssets.load('chatting_app.jpg'),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      Future.delayed(const Duration(milliseconds: 3), () {
+                      });
+                      return Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40),
+                          child: Image.asset(
+                            'images/chatting_app.jpg',
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Loader();
+                    }
+                  },
                 ),
-              )
+              ),
             ],
           ),
           SizedBox(
@@ -46,14 +62,23 @@ class ProjectsDesktop extends StatelessWidget {
             children: [
               Expanded(
                 flex: 4,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(
-                      'images/donorpatientImage.jpg',
-                    ),
-                  ),
+                child: FutureBuilder<ui.Image>(
+                  future: imageAssets.load('donorpatientImage.jpg'),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Image.asset(
+                            'images/donorpatientImage.jpg',
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Loader();
+                    }
+                  },
                 ),
               ),
               Expanded(
@@ -83,14 +108,23 @@ class ProjectsDesktop extends StatelessWidget {
               ),
               Expanded(
                 flex: 4,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(
-                      'images/sosimage.jpg',
-                    ),
-                  ),
+                child: FutureBuilder<ui.Image>(
+                  future: imageAssets.load('sosimage.jpg'),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Image.asset(
+                            'images/sosimage.jpg',
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Loader();
+                    }
+                  },
                 ),
               ),
             ],

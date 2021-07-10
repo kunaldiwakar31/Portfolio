@@ -1,4 +1,5 @@
 // @dart=2.9
+import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/HomePage.dart';
 import 'package:portfolio/Tablet/TabletTabs/AboutMeTablet.dart';

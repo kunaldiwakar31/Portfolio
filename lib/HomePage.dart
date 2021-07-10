@@ -1,3 +1,4 @@
+import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/Desktop/HomePageDesktop.dart';
 import 'package:portfolio/Tablet/HomePageTablet.dart';

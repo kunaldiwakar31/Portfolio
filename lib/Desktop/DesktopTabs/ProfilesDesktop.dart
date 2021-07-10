@@ -1,26 +1,39 @@
+import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/TextsConstants.dart';
+import 'dart:ui' as ui;
 
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:url_launcher/url_launcher.dart';
+
+final imageAssets = ImageAssetCache(basePath: 'images/');
 
 class ProfilesDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      Opacity(
-        opacity: 0.2,
-        child: Center(
-          child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: Image.asset(
-                'images/imagebackground.jpg',
-                fit: BoxFit.fill,
-              )),
-        ),
+      FutureBuilder<ui.Image>(
+        future: imageAssets.load('imagebackground.jpg'),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Opacity(
+              opacity: 0.2,
+              child: Center(
+                child: SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Image.asset(
+                      'images/imagebackground.jpg',
+                      fit: BoxFit.fill,
+                    )),
+              ),
+            );
+          } else {
+            return Text('');
+          }
+        },
       ),
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
